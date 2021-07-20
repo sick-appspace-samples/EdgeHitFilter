@@ -1,0 +1,64 @@
+{
+    "units": {},
+    "bindings": {},
+    "customcontrols": {},
+    "controls": {
+        "de_sick_appspace_viewer_2D": {
+            "viewControl": {
+                "control": "de.sick.sopas.devices.appengine.VisualizationControl2D",
+                "binding": [
+                    {
+                        "name": "",
+                        "property": "WSMessage",
+                        "topic": "ws:/blob/viewerID",
+                        "path": "",
+                        "autoCommit": false,
+                        "autoUpdate": 0,
+                        "preSet": "",
+                        "postGet": "",
+                        "direction": "bidirectional",
+                        "init": "",
+                        "options": {
+                            "splitParamResult": false
+                        },
+                        "updateOnResume": false,
+                        "paramPath": "",
+                        "resultPath": ""
+                    }
+                ],
+                "options": {
+                    "defaultHeight": "400px"
+                }
+            }
+        },
+        "de_sick_appspace_viewer_3D": {
+            "viewControl": {
+                "control": "de.sick.sopas.devices.appengine.VisualizationControl3D",
+                "binding": [
+                    {
+                        "name": "",
+                        "property": "WSMessage",
+                        "topic": "ws:/blob/viewerID",
+                        "path": "",
+                        "autoCommit": false,
+                        "autoUpdate": 0,
+                        "preSet": "",
+                        "postGet": "",
+                        "direction": "bidirectional",
+                        "init": "",
+                        "options": {
+                            "splitParamResult": false
+                        },
+                        "updateOnResume": false,
+                        "paramPath": "",
+                        "resultPath": ""
+                    }
+                ],
+                "options": {
+                    "defaultHeight": "400px"
+                }
+            }
+        }
+    },
+    "dialogs": {}
+}
