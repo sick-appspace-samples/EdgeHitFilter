@@ -1,5 +1,5 @@
 
---Start of Global Scope--------------------------------------------------------- 
+--Start of Global Scope---------------------------------------------------------
 local counter = 0
 local SCAN_FILE_PATH = "resources/TestScenario.xml"
 print("Input File: ", SCAN_FILE_PATH)
@@ -25,7 +25,7 @@ edgeHitFilter = Scan.EdgeHitFilter.create()
 assert(edgeHitFilter,"Error: EdgeHitFilter could not be created")
 Scan.EdgeHitFilter.setMaxDistNeighbor(edgeHitFilter, 30)
 Scan.EdgeHitFilter.setEnabled(edgeHitFilter, true)
-  
+
 -- Create provider. Providing starts automatically with the register call
 -- which is found below the callback function
 provider = Scan.Provider.File.create()
@@ -37,7 +37,7 @@ Scan.Provider.File.setFile(provider, SCAN_FILE_PATH)
 -- Set the DataSet of the recorded data which should be used.
 Scan.Provider.File.setDataSetID(provider, 1)
 
---End of Global Scope----------------------------------------------------------- 
+--End of Global Scope-----------------------------------------------------------
 
 --Start of Function and Event Scope---------------------------------------------
 
@@ -45,15 +45,15 @@ Scan.Provider.File.setDataSetID(provider, 1)
 -- Compares the distances of two scans of the specified echo
 --------------------------------------------------------------------------------
 function compareScans(inputScan, filteredScan, iEcho, printDetails)
-  
+
   -- get the beam and echo counts
   local beamCountInput = Scan.getBeamCount(inputScan)
   local echoCountInput = Scan.getEchoCount(inputScan)
   local beamCountFiltered = Scan.getBeamCount(filteredScan)
   local echoCountFiltered = Scan.getEchoCount(filteredScan)
-  
+
   local count = 0
-  
+
   -- Checks
   if ( iEcho <= echoCountInput and iEcho <= echoCountFiltered ) then
     if ( beamCountInput == beamCountFiltered ) then
@@ -78,23 +78,23 @@ function compareScans(inputScan, filteredScan, iEcho, printDetails)
   return count
 end
 
--- Callback function to process new scans
+---Callback function to process new scans
 function handleNewScan(scan)
   counter = counter + 1
-  
+
   -- Clone input scan
   inputScan = Scan.clone(scan)
-  
+
   -- Filter edge hits; the input scan if modified in place
   filteredScan = Scan.EdgeHitFilter.filter(edgeHitFilter, scan)
-  
+
   -- and show the changed distances of echo #1
   local hits = 0
   if ( inputScan ~= nil ) then
     hits = compareScans(inputScan, filteredScan, 1, false)
     print(DateTime.getTime(), string.format("Scan %6d: EdgeHits = %d", counter, hits))
   end
-  
+
   -- Transform to PointCloud to view in the PointCloud viewer on the webpage
   if nil ~= Scan.Transform then
     local pointCloud = Scan.Transform.transformToPointCloud(transform, filteredScan)
@@ -102,7 +102,7 @@ function handleNewScan(scan)
     View.present(viewer)
   end
 end
--- Register callback function to "OnNewScan" event. 
+-- Register callback function to "OnNewScan" event.
 -- This call also starts the playback of scans
 Scan.Provider.File.register(provider, "OnNewScan", handleNewScan)
 
